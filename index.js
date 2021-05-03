@@ -3,7 +3,7 @@ const envelopeRouter = require('./Routers/envelopes');
 const app = express();
 const port = 4000;
 
-app.use('/envelope',envelopeRouter);
+app.use('/envelopes',envelopeRouter);
 
 
 
