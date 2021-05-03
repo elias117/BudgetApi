@@ -10,12 +10,13 @@ router.param('id', (req, res, next, id) => {
     const envIndex = Envelopes.findIndex( e => {
         return e.id === Number(id);
     });
-    const env = Envelopes[envIndex];
-    if (env){
+    if (envIndex !== -1){
+        const env = Envelopes[envIndex];
         req.env = env;
+        req.envIndex = envIndex;
         next();
     }else{
-        res.status(404).send();
+        res.status(404).send('Envelope not Found');
     }
 });
 
@@ -38,7 +39,7 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    Envelopes.splice(req.env.id-1, 1);
+    Envelopes.splice(req.envIndex, 1);
     res.status(200).send(req.env);
 });
 
