@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const envelopeRouter = require('./Routers/envelopes');
 const morgan = require('morgan');
+var cors = require('cors');
 
 const app = express();
 // eslint-disable-next-line no-undef
@@ -11,7 +12,7 @@ app.use((req, res, next)=> {
   morgan('tiny');
   next();
 });
-
+app.use(cors());
 
 app.use('/envelopes', envelopeRouter);
 
