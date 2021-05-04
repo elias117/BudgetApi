@@ -1,9 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const envelopeRouter = require('./Routers/envelopes');
 const morgan = require('morgan');
 
 const app = express();
-const port = 4000;
+const port = process.env.port || 4000;
 
 app.use((req, res, next)=> {
   morgan('tiny');
