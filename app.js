@@ -8,7 +8,7 @@ var cors = require("cors");
 
 const app = express();
 // eslint-disable-next-line no-undef
-const port = process.env.port || 4000;
+const port = process.env.PORT || 4000;
 
 app.use((req, res, next) => {
     morgan("tiny");
