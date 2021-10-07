@@ -9,5 +9,18 @@ const db = new Pool({
         : connectionString,
     ssl: isProduction ? { rejectUnauthorized: false } : null,
 });
-
+const createEnvelopeTable =
+    "CREATE TABLE envelopes ( id SERIAL PRIMARY KEY NOT NULL, name TEXT UNIQUE NOT NULL, budget MONEY NOT NULL )";
+const createTransactionTable =
+    "CREATE TABLE transactions ( id SERIAL PRIMARY KEY NOT NULL, envelope_id INTEGER REFERENCES envelopes(id) NOT NULL, date DATE NOT NULL, amount MONEY NOT NULL )";
+async function createTables() {
+    console.log("creating tables");
+    try {
+        await db.query(createEnvelopeTable);
+        await db.query(createTransactionTable);
+    } catch (e) {
+        console.log("Tables already exists");
+    }
+}
+createTables();
 module.exports = { db };

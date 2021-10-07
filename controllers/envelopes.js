@@ -45,12 +45,12 @@ exports.getEnvelopeById = async (req, res) => {
 };
 
 exports.addEnvelope = async (req, res) => {
-    const { title, budget } = req.body;
+    const { name, budget } = req.body;
     const query =
-        "INSERT INTO envelopes (title, budget) VALUES ($1, $2) RETURNING *";
+        "INSERT INTO envelopes (name, budget) VALUES ($1, $2) RETURNING *";
 
     try {
-        const newEnvelope = await db.query(query, [title, budget]);
+        const newEnvelope = await db.query(query, [name, budget]);
         res.status(201).send({
             status: "Success",
             message: "New Envelope Created",
@@ -64,13 +64,13 @@ exports.addEnvelope = async (req, res) => {
 };
 
 exports.updateEnvelope = async (req, res) => {
-    const { title, budget } = req.body;
+    const { name, budget } = req.body;
     const { id } = req.params;
     const query =
-        "UPDATE envelopes SET title = $1, budget = $2 WHERE id = $3 RETURNING *";
+        "UPDATE envelopes SET name = $1, budget = $2 WHERE id = $3 RETURNING *";
 
     try {
-        const updatedEnvelope = await db.query(query, [title, budget, id]);
+        const updatedEnvelope = await db.query(query, [name, budget, id]);
         res.status(200).send(updatedEnvelope.rows[0]);
     } catch (err) {
         return res.status(500).send({
@@ -102,12 +102,12 @@ exports.deleteEnvelope = async (req, res) => {
 
 exports.addEnvelopeTransaction = async (req, res) => {
     const { id } = req.params;
-    const { title, amount } = req.body;
+    const { name, amount } = req.body;
     const date = new Date();
 
     const envelopeQuery = "SELECT * FROM envelopes WHERE envelopes.id = $1";
     const transactionQuery =
-        "INSERT INTO transactions (title, amount, date, envelope_id) Values ($1, $2, $3, $4) RETURNING *";
+        "INSERT INTO transactions (name, amount, date, envelope_id) Values ($1, $2, $3, $4) RETURNING *";
     const updateEnvQuery =
         "UPDATE envelopes SET budget = budget - $1 WHERE id = $2 RETURNING *";
 
@@ -120,7 +120,7 @@ exports.addEnvelopeTransaction = async (req, res) => {
             });
         }
         const newTransaction = await db.query(transactionQuery, [
-            title,
+            name,
             amount,
             date,
             id,
