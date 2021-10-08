@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const envelopeRouter = require("./Routers/envelopes");
 const transactionRouter = require("./Routers/transactions");
 const docsRouter = require("./Routers/docs");
@@ -16,6 +17,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 app.use("/api-docs", docsRouter);
 app.use("/api/v1/envelopes", envelopeRouter);

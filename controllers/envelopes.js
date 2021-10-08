@@ -34,6 +34,7 @@ exports.getEnvelopeById = async (req, res) => {
         }
         res.status(200).send({
             status: "Success",
+            name: req.cookies.name,
             message: "Envelope Information Received",
             data: envelope.rows[0],
         });
