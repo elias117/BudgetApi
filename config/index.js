@@ -21,6 +21,12 @@ async function createTables() {
         await db.query(createUserTable);
         await db.query(createEnvelopeTable);
         await db.query(createTransactionTable);
+        const insertSuperUserQuery =
+            "INSERT INTO budget_users (username, password) VALUES ($1, $2)";
+        await db.query(insertSuperUserQuery, [
+            process.env.SUPERUSER,
+            process.env.SUPERUSERPASSWORD,
+        ]);
     } catch (e) {
         console.log("Tables already exists");
     }

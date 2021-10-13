@@ -1,13 +1,12 @@
 require("dotenv").config();
 const express = require("express");
-const cookieParser = require("cookie-parser");
 const envelopeRouter = require("./Routers/envelopes");
 const transactionRouter = require("./Routers/transactions");
 const authRouter = require("./Routers/auth");
 const docsRouter = require("./Routers/docs");
 const morgan = require("morgan");
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 // eslint-disable-next-line no-undef

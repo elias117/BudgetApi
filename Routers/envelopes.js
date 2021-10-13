@@ -11,6 +11,8 @@ const {
     addEnvelopeTransaction,
 } = require("../controllers/envelopes");
 
+const { authorize } = require("../controllers/auth");
+router.use(authorize);
 /**
  * @swagger
  * /api/v1/envelopes:

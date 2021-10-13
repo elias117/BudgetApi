@@ -8,6 +8,8 @@ const {
     updateTransaction,
 } = require("../controllers/transactions");
 
+const { authorize } = require("../controllers/auth");
+router.use(authorize);
 /**
  * @swagger
  * /api/v1/transactions:
