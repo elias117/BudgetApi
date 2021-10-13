@@ -17,7 +17,11 @@ const swaggerOptions = {
             },
         },
     },
-    apis: ["./Routers/envelopes.js", "./Routers/transactions.js"],
+    apis: [
+        "./Routers/envelopes.js",
+        "./Routers/transactions.js",
+        "./Routers/auth.js",
+    ],
 };
 const specs = swagger(swaggerOptions);
 
