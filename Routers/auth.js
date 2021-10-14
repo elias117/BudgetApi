@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { authenticate } = require("../controllers/auth");
+const { authenticate, refresh } = require("../controllers/auth");
 /**
  * @swagger
  * /api/v1/auth:
@@ -27,11 +27,26 @@ const { authenticate } = require("../controllers/auth");
  *                username: elias
  *                password: password
  *      responses:
+ *        "200":
+ *          description: Logged in Successfully
  *        "403":
  *          description: Invalid Credentials
  */
 router.post("/login", authenticate);
-// router.post("/create-user", createUser);
-// router.delete("/delete-user", deleteUser);
-// router.patch("/update-user-password", updateUserPassword);
+/**
+ * @swagger
+ * /api/v1/auth:
+ *    post:
+ *      summary: get new access_token
+ *      produces:
+ *        - application/json
+ *      tags:
+ *        - Auth
+ *      responses:
+ *        "200":
+ *          description: Logged in Successfully
+ *        "403":
+ *          description: Invalid Credentials
+ */
+router.get("/refresh", refresh);
 module.exports = router;
