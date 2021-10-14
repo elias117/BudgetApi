@@ -4,7 +4,7 @@ const router = express.Router();
 const { authenticate, refresh } = require("../controllers/auth");
 /**
  * @swagger
- * /api/v1/auth:
+ * /api/v1/auth/login:
  *    post:
  *      summary: Log User in
  *      produces:
@@ -35,7 +35,7 @@ const { authenticate, refresh } = require("../controllers/auth");
 router.post("/login", authenticate);
 /**
  * @swagger
- * /api/v1/auth:
+ * /api/v1/auth/refresh:
  *    post:
  *      summary: get new access_token
  *      produces:
