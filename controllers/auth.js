@@ -1,7 +1,7 @@
 const { db } = require("../config/db");
 const jwt = require("jsonwebtoken");
 const guid = require("js-guid");
-const cache = [];
+const cache = {};
 exports.authenticate = async (req, res) => {
     const findUserQuery = "SELECT * FROM budget_users WHERE username = $1";
     try {
@@ -34,7 +34,7 @@ exports.authenticate = async (req, res) => {
                 httpOnly: true,
                 path: "/api/v1/auth/refresh",
             });
-            cache.push(refreshToken);
+            cache[refreshToken] = user.username;
             res.status(200).send("You are now logged in");
         }
     } catch (err) {
@@ -73,7 +73,7 @@ exports.refresh = async (req, res, next) => {
                     refreshToken,
                     process.env.ACCESS_TOKEN_SECRET
                 );
-                if (cache.includes(refreshToken)) {
+                if (cache[refreshToken]) {
                     const newAccessToken = jwt.sign(
                         { username: refreshData.username },
                         process.env.ACCESS_TOKEN_SECRET,
