@@ -1,4 +1,4 @@
-const { db } = require("../config");
+const { db } = require("../config/db");
 
 exports.getEnvelopes = async (req, res) => {
     const query = "SELECT * FROM envelopes";
