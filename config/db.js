@@ -22,7 +22,7 @@ async function createTables() {
         await db.query(createEnvelopeTable);
         await db.query(createTransactionTable);
         const insertSuperUserQuery =
-            "INSERT INTO budget_users (username, password) VALUES ($1, $2, $3)";
+            "INSERT INTO budget_users (username, password, role) VALUES ($1, $2, $3)";
         await db.query(insertSuperUserQuery, [
             process.env.SUPERUSER,
             process.env.SUPERUSERPASSWORD,
