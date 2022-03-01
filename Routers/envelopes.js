@@ -72,12 +72,12 @@ router.get("/:id", getEnvelopeById);
  *            schema:
  *              type: object
  *              properties:
- *                title:
+ *                name:
  *                  type: string
  *                budget:
  *                  type: integer
  *              example:
- *                title: Scuba lessons
+ *                name: Scuba lessons
  *                budget: 300
  *      responses:
  *        "201":
