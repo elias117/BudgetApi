@@ -21,7 +21,7 @@ exports.authenticate = async (req, res) => {
                     expiresIn: "3600s",
                 }
             );
-            const guidString = guid.ToString(guid.NewGuid());
+            const guidString = guid.Guid.newGuid().StringGuid;
             const refreshToken = jwt.sign(
                 { id: guidString, username: user.username },
                 process.env.ACCESS_TOKEN_SECRET,
